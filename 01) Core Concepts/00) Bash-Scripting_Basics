@@ -1,0 +1,83 @@
+# Use Specific ENV and startup programs
+# Adding the $HOME/bin where you have your shell scripts that needs to be executed to the Current PATH
+
+# Now PATH = CURRENT PATH + /root/bin  -->  Where you have shell scripts
+# Exporting that Path to make sure that PATH can be visible in environment
+
+PATH=$PATH:$HOME/bin
+
+export PATH
+
+###################################################################################################################
+
+# Execute the following command inside /root/bin/ to make shell scripts executable
+
+chmod +x *
+chmod 755 *
+
+# Command to execute the shell scripts
+
+./file_name
+
+Example:  ./test.sh
+
+###################################################################################################################
+
+# Adding alias in .profile makes only your profile has that alias
+# Adding something in .bashrc, will change every users home since it is common in all users
+
+# Alias
+alias .='cd ../'
+alias ..='cd ../../'
+alias ...='cd ../../../'
+alias c='clear'
+alias l='ls'
+alias k='kubectl'
+alias la='ls -la'
+
+###################################################################################################################
+
+# Creating a Variable and Exporting to make visible in environment
+
+MYFIRSTNAME="Bhadra"
+
+env | grep MYFIRSTNAME  -->  You won't see the result since the variable is not exported yet
+
+export MYFIRSTNAME
+
+env | grep MYFIRSTNAME  -->  Since we exported the variable this can be visible now
+
+* Note * --> This Variable will be visible only in current shell, If you exit and login back it won't appear
+
+###################################################################################################################
+
+# Export option  will create and export the variable at the same time
+
+export SEARCHSITE="https://www.google.com"
+
+elinks $SEARCHSITE  -->  This will open the Google in current terminal
+
+###################################################################################################################
+
+set | grep COLUMNS  --> Will return No.of Columns  # Things specified to current session, not system wide
+
+echo $COLUMNS       --> Will return No.of Columns
+
+env | grep COLUMNS  --> Won't return any Columns
+
+###################################################################################################################
+
+# Shell Expansion
+
+echo sh{ot,oot,ort}  --> short shoot short
+
+echo st{il,al}l      --> still stall
+
+echo "${!HO*}"       --> HOME HOSTNAME HOSTTYPE
+
+echo "${VARNAME:=something}"  -->  something
+echo $VARNAME                 -->  something
+
+echo "$[2 * 2]"  -->  4
+
+###################################################################################################################
